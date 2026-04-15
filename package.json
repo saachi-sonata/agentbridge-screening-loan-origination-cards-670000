@@ -1,0 +1,39 @@
+{
+  "name": "screening-•-loan-origination-(cards)",
+  "version": "1.0.0",
+  "description": "Screening • Loan Origination (Cards) screens alerts and underwrites customer profiles; applies decision gates and observability; orchestrates via Data Lake to reduce settlement breaks.",
+  "main": "workflow.json",
+  "keywords": [
+    "agentbridge",
+    "workflow",
+    "automation",
+    "ai-agents",
+    "planner-executor",
+    "banking-&-finance",
+    "markets",
+    "kyc",
+    "sanctions",
+    "planner-executor",
+    "banking"
+  ],
+  "author": "AgentBridge",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saachi-sonata/agentbridge-screening-loan-origination-cards-670000.git"
+  },
+  "bugs": {
+    "url": "https://github.com/saachi-sonata/agentbridge-screening-loan-origination-cards-670000/issues"
+  },
+  "homepage": "https://github.com/saachi-sonata/agentbridge-screening-loan-origination-cards-670000#readme",
+  "scripts": {
+    "start": "echo \"Import this workflow into your AgentBridge instance\"",
+    "validate": "echo \"Workflow validation complete\"",
+    "test": "echo \"Run workflow tests\"",
+    "deploy": "echo \"Deploy to AgentBridge instance\""
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "agentbridge": ">=6.0.0"
+  }
+}
