@@ -1,0 +1,351 @@
+{
+  "id": "tpl-3952416309",
+  "name": "Screening • Loan Origination (Cards)",
+  "description": "Screening • Loan Origination (Cards) screens alerts and underwrites customer profiles; applies decision gates and observability; orchestrates via Data Lake to reduce settlement breaks.",
+  "industry": "Banking & Finance",
+  "pattern": "Planner-Executor",
+  "complexity": "Intermediate",
+  "rating": 4.3,
+  "downloads": 15352,
+  "favorites": 2394,
+  "executionTime": "17 min",
+  "tags": [
+    "markets",
+    "kyc",
+    "sanctions",
+    "planner-executor",
+    "banking"
+  ],
+  "steps": [
+    {
+      "id": "intake",
+      "name": "Transaction Intake",
+      "description": "Collect, validate and normalize transactions from SWIFT Gateway; attach a runId and timestamp for traceability."
+    },
+    {
+      "id": "planner-0",
+      "name": "Planner",
+      "description": "Execute planner phase for the Planner-Executor pattern: persist interim state, enforce guardrails, and emit structured JSON results."
+    },
+    {
+      "id": "executor-1",
+      "name": "Executor",
+      "description": "Execute executor phase for the Planner-Executor pattern: persist interim state, enforce guardrails, and emit structured JSON results."
+    },
+    {
+      "id": "limit-control-0",
+      "name": "Limit Control",
+      "description": "Limit Control across joined datasets; branch on thresholds using decision gates; write metrics (success/error counts) for observability."
+    },
+    {
+      "id": "portfolio-check-1",
+      "name": "Portfolio Check",
+      "description": "Portfolio Check across joined datasets; branch on thresholds using decision gates; write metrics (success/error counts) for observability."
+    },
+    {
+      "id": "settlement-2",
+      "name": "Settlement",
+      "description": "Settlement across joined datasets; branch on thresholds using decision gates; write metrics (success/error counts) for observability."
+    },
+    {
+      "id": "underwriting-3",
+      "name": "Underwriting",
+      "description": "Underwriting across joined datasets; branch on thresholds using decision gates; write metrics (success/error counts) for observability."
+    },
+    {
+      "id": "finalize",
+      "name": "Operations Handoff",
+      "description": "Assemble final payload with status, artifacts, KPIs and audit trail; store to Treasury; return response JSON for the client."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "intake",
+      "type": "agentbridge",
+      "data": {
+        "label": "Transaction Intake",
+        "description": "Collect, validate and normalize transactions from SWIFT Gateway; attach a runId and timestamp for traceability.",
+        "nodeType": "input",
+        "category": "ai-models",
+        "executionMode": "autonomous"
+      },
+      "position": {
+        "x": 60,
+        "y": 120
+      }
+    },
+    {
+      "id": "planner-0",
+      "type": "agentbridge",
+      "data": {
+        "label": "Planner",
+        "description": "Execute planner phase for the Planner-Executor pattern: persist interim state, enforce guardrails, and emit structured JSON results.",
+        "nodeType": "llm",
+        "category": "ai-models",
+        "executionMode": "autonomous"
+      },
+      "position": {
+        "x": 310,
+        "y": 120
+      }
+    },
+    {
+      "id": "executor-1",
+      "type": "agentbridge",
+      "data": {
+        "label": "Executor",
+        "description": "Execute executor phase for the Planner-Executor pattern: persist interim state, enforce guardrails, and emit structured JSON results.",
+        "nodeType": "llm",
+        "category": "ai-models",
+        "executionMode": "autonomous"
+      },
+      "position": {
+        "x": 560,
+        "y": 120
+      }
+    },
+    {
+      "id": "limit-control-0",
+      "type": "agentbridge",
+      "data": {
+        "label": "Limit Control",
+        "description": "Limit Control across joined datasets; branch on thresholds using decision gates; write metrics (success/error counts) for observability.",
+        "nodeType": "llm",
+        "category": "ai-models",
+        "executionMode": "autonomous"
+      },
+      "position": {
+        "x": 810,
+        "y": 120
+      }
+    },
+    {
+      "id": "portfolio-check-1",
+      "type": "agentbridge",
+      "data": {
+        "label": "Portfolio Check",
+        "description": "Portfolio Check across joined datasets; branch on thresholds using decision gates; write metrics (success/error counts) for observability.",
+        "nodeType": "llm",
+        "category": "ai-models",
+        "executionMode": "autonomous"
+      },
+      "position": {
+        "x": 1060,
+        "y": 120
+      }
+    },
+    {
+      "id": "settlement-2",
+      "type": "agentbridge",
+      "data": {
+        "label": "Settlement",
+        "description": "Settlement across joined datasets; branch on thresholds using decision gates; write metrics (success/error counts) for observability.",
+        "nodeType": "llm",
+        "category": "ai-models",
+        "executionMode": "autonomous"
+      },
+      "position": {
+        "x": 1310,
+        "y": 120
+      }
+    },
+    {
+      "id": "underwriting-3",
+      "type": "agentbridge",
+      "data": {
+        "label": "Underwriting",
+        "description": "Underwriting across joined datasets; branch on thresholds using decision gates; write metrics (success/error counts) for observability.",
+        "nodeType": "llm",
+        "category": "ai-models",
+        "executionMode": "autonomous"
+      },
+      "position": {
+        "x": 1560,
+        "y": 120
+      }
+    },
+    {
+      "id": "finalize",
+      "type": "agentbridge",
+      "data": {
+        "label": "Operations Handoff",
+        "description": "Assemble final payload with status, artifacts, KPIs and audit trail; store to Treasury; return response JSON for the client.",
+        "nodeType": "output",
+        "category": "ai-models",
+        "executionMode": "autonomous"
+      },
+      "position": {
+        "x": 1810,
+        "y": 120
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-0",
+      "source": "intake",
+      "target": "planner-0",
+      "type": "agentbridge",
+      "data": {
+        "label": "flow"
+      }
+    },
+    {
+      "id": "edge-1",
+      "source": "planner-0",
+      "target": "executor-1",
+      "type": "agentbridge",
+      "data": {
+        "label": "flow"
+      }
+    },
+    {
+      "id": "edge-2",
+      "source": "executor-1",
+      "target": "limit-control-0",
+      "type": "agentbridge",
+      "data": {
+        "label": "flow"
+      }
+    },
+    {
+      "id": "edge-3",
+      "source": "limit-control-0",
+      "target": "portfolio-check-1",
+      "type": "agentbridge",
+      "data": {
+        "label": "flow"
+      }
+    },
+    {
+      "id": "edge-4",
+      "source": "portfolio-check-1",
+      "target": "settlement-2",
+      "type": "agentbridge",
+      "data": {
+        "label": "flow"
+      }
+    },
+    {
+      "id": "edge-5",
+      "source": "settlement-2",
+      "target": "underwriting-3",
+      "type": "agentbridge",
+      "data": {
+        "label": "flow"
+      }
+    },
+    {
+      "id": "edge-6",
+      "source": "underwriting-3",
+      "target": "finalize",
+      "type": "agentbridge",
+      "data": {
+        "label": "flow"
+      }
+    }
+  ],
+  "preview": "Transaction Intake → Planner → Executor → Limit Control → Portfolio Check → Settlement → Underwriting → Operations Handoff",
+  "featured": false,
+  "createdAt": "2025-05-30T17:54:09.152Z",
+  "author": "AgentBridge Team",
+  "deployments": 1560,
+  "lastDeployed": "2026-03-23T20:58:45.449Z",
+  "configuration": {
+    "provider": "nvidia",
+    "region": "us-west-2",
+    "compute": "memory-optimized"
+  },
+  "healthStatus": "healthy",
+  "deploymentCount": 784,
+  "githubRepo": "https://github.com/agentbridge/screening-•-loan-origination-(cards)",
+  "maintainer": "AgentBridge Team",
+  "agenticLayers": {
+    "reasoning": {
+      "modelType": "gpt-4o",
+      "reasoningPattern": "ReAct",
+      "contextWindow": 128000,
+      "memorySystem": "hybrid",
+      "decisionFramework": "Multi-Criteria Decision Analysis"
+    },
+    "orchestration": {
+      "workflowEngine": "n8n",
+      "coordinationPattern": "centralized",
+      "failoverStrategy": "retry",
+      "loadBalancing": "intelligent"
+    },
+    "protocol": {
+      "communicationProtocol": "MCP",
+      "messageFormat": "JSON",
+      "authenticationMethod": "OAuth2",
+      "encryptionStandard": "AES-256"
+    },
+    "governance": {
+      "policyEngine": "OPA",
+      "complianceStandards": [
+        "SOC2",
+        "GDPR"
+      ],
+      "auditTrail": true,
+      "riskAssessment": "medium",
+      "dataClassification": "internal"
+    },
+    "observability": {
+      "metricsCollection": "Prometheus",
+      "loggingFramework": "ELK",
+      "tracingSystem": "Jaeger",
+      "alertingRules": [],
+      "dashboardConfig": {
+        "layout": "grid",
+        "widgets": [
+          "metrics",
+          "logs",
+          "traces"
+        ],
+        "refreshInterval": 30
+      }
+    },
+    "intelligence": {
+      "learningCapability": "online",
+      "knowledgeBase": "vector-db",
+      "adaptationMechanism": "ml-based",
+      "performanceOptimization": "ai-driven"
+    }
+  },
+  "businessFunction": "data-preparation-node",
+  "autonomyLevel": "semi-autonomous",
+  "cognitiveCapabilities": [
+    {
+      "name": "Pattern Recognition",
+      "description": "Identifies patterns in business processes",
+      "confidenceLevel": 0.85,
+      "lastUpdated": "2026-04-15T17:54:09.265Z"
+    }
+  ],
+  "roiMetrics": {
+    "costSavings": 91617,
+    "timeReduction": 31,
+    "accuracyImprovement": 19,
+    "throughputIncrease": 53,
+    "errorReduction": 58
+  },
+  "complianceFramework": {
+    "standards": [
+      "SOC2",
+      "GDPR",
+      "ISO27001"
+    ],
+    "certifications": [
+      "SOC2 Type II"
+    ],
+    "auditFrequency": "monthly",
+    "lastAudit": "2026-03-23T03:39:53.105Z"
+  },
+  "scalingPolicy": {
+    "minInstances": 1,
+    "maxInstances": 10,
+    "scaleUpThreshold": 80,
+    "scaleDownThreshold": 20,
+    "cooldownPeriod": 300
+  }
+}
