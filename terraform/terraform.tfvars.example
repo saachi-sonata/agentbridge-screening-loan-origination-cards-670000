@@ -1,0 +1,11 @@
+# Copy this file to terraform.tfvars and fill in your values
+# NEVER commit terraform.tfvars to version control
+
+# ──── Provider Credentials ────
+aws_access_key = "your-access-key"
+aws_secret_key = "your-secret-key"
+
+# ──── Configuration ────
+region        = "us-east-1"
+instance_type = "t3.medium"
+environment   = "production"
